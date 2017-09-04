@@ -1,17 +1,22 @@
 <?php
 interface Weight
 {
-    public function getWeight($weight);
+    public function setWeight($weight);
+}
+interface Model
+{
+	public function setModel($model);
 }
 class PhisicalObject implements Weight
 {
     public $weight;
-    public function getWeight($weight)
+    public function setWeight($weight)
     {
         $this->weight = $weight;
     }
 }
-class  Car extends PhisicalObject 
+class  Car extends PhisicalObject
+
 {
     public $model;
     public $color;
@@ -20,12 +25,29 @@ class  Car extends PhisicalObject
         $this->model = $model;
         $this->color = $color;
     }
-    public function getDrive();
-    public function getWash();
-    public function getFuel();    
+    public function getDrive(){
+    	echo "я еду!";
+    }
+    public function getWash(){
+    	echo "я моюсь!";
+    }
+    public function getFuel(){
+    	echo "я на заправке!";
+    }   
 }
+
+
+/* вот тут что-то не так. не понял, как имплементировать интерфейс к наследующему классу.
+class Car implements Model
+{
+	public function setModel($model){
+		echo "я - $model";
+	}
+} */
 $toyota = new Car('Corolla', 'red');
 $honda = new Car('Civic', 'green');
+
+
 
 class Tv extends PhisicalObject
 {
@@ -36,7 +58,9 @@ class Tv extends PhisicalObject
         $this->model = $model;
         $this->size = $size;
     }
-    public function standby();
+    public function standby(){
+    	echo "on/of!";
+    }
     public function changeChannel($channel)
     {
     	$this->channel = $channel;
@@ -60,15 +84,17 @@ class Pen extends PhisicalObject
         $this->ink_color = $ink_color;
         $this->material = $material;     
     } 
-    public function getWrite();
+    public function getWrite(){
+    	echo "я пишу! чернила - $this->ink_color.";
+    }
     public function changeColor($ink_color)
     {
     	$this->ink_color = $ink_color;
     }
 }
-$bic_pen = new Pen ('BIC', 'red', 'plastic');
-$parker_pen = new Pen ('Parker', 'blue', 'metal');
-
+$bic = new Pen ('BIC', 'red', 'plastic');
+$parker = new Pen ('Parker', 'blue', 'metal');
+$bic->getWrite();
 class Duck extends PhisicalObject
 {
     public $name;
@@ -78,8 +104,12 @@ class Duck extends PhisicalObject
         $this->name = $name;
         $this->sex = $sex;
     }
-    public function Swiming();
-    public function Fishing();    
+    public function swimming(){
+    	echo "плавание!";
+    }
+    public function fishihg(){
+    	echo "рыбалка!";
+    }    
 }
 $duck1 = new Duck('Donald', 'he is');
 $duck2 = new Duck('Duffy', 'she is');
